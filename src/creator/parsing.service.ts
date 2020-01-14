@@ -98,13 +98,13 @@ export class ParsingService {
 
   private parseValue(
     field: FieldInfo,
-    value: Element | Document,
+    value: any,
     typesDict: TypesDict,
   ): any {
     const type = field.type;
     const fieldInHtml = field.fieldInHtml || 'textContent';
     const valueFromHtml =
-      field.isNodeAttribute && value instanceof Element
+      (field.isNodeAttribute && value.attributes)
         ? value.getAttribute(field.fieldInHtml)
         : value[fieldInHtml];
 
