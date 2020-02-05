@@ -2,13 +2,11 @@ import {
   Controller,
   Post,
   BadRequestException,
-  UnprocessableEntityException,
   InternalServerErrorException,
   Body,
 } from '@nestjs/common';
 import { ParsingService } from './parsing.service';
 import { CreatorDto } from './dto/creator-dto';
-import { CreatorObj } from './dto/creator-obj';
 import { UserInputException } from './../shared/models/user-input-exception';
 import { Observable } from 'rxjs';
 

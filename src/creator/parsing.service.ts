@@ -6,7 +6,8 @@ import { CreatorObj } from './dto/creator-obj';
 import { FieldInfo } from './dto/field-info';
 import { TypesDict } from './dto/types-dict';
 import { UserInputException } from './../shared/models/user-input-exception';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import * as request from 'request-promise';
 
 @Injectable()
 export class ParsingService {
@@ -31,11 +32,15 @@ export class ParsingService {
   parse(creatorDto: CreatorDto): Observable<any> {
     const config = {
       url: encodeURI(creatorDto.url),
-      headers: creatorDto.headers,
+      headers: creatorDto.headers?.reduce((prev, el) => {
+        prev[el.key] = el.value;
+        return prev;
+      }, {}),
     };
-    return this.http
-      .get<string>(encodeURI(creatorDto.url), config)
-      .pipe(map(resp => this.handleHttpResponse(resp.data, creatorDto)));
+    // (err, resp, body) => this.handleHttpResponse(body, creatorDto)
+    let a = request(config)
+    .then(resp => this.handleHttpResponse(resp, creatorDto));
+    return of(a);
   }
 
   private getHost(url: string): string {
