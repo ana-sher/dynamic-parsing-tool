@@ -26,7 +26,7 @@
     "@nestjs/swagger": "^3.1.0",
     "@types/jsdom": "^12.2.4",
     "@types/request-promise": "^4.1.45",
-    "jsdom": "^15.2.1",
+    "jsdom": "^16.5.0",
     "reflect-metadata": "^0.1.13",
     "request-promise": "^4.2.5",
     "rimraf": "^3.0.0",
