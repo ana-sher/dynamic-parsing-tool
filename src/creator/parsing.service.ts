@@ -7,6 +7,8 @@ import { FieldInfo } from './dto/field-info';
 import { TypesDict } from './dto/types-dict';
 import { UserInputException } from './../shared/models/user-input-exception';
 import puppeteer from 'puppeteer-extra';
+import chromium = require("@sparticuz/chromium");
+import puppeteerCore from 'puppeteer-core';
 import StealthPlugin = require('puppeteer-extra-plugin-stealth');
 
 @Injectable()
@@ -39,10 +41,16 @@ export class ParsingService {
     };
     puppeteer.use(StealthPlugin());
     const lang = config.headers['accept-language'] ?? 'en-US,en';
-    const browser = await puppeteer.launch({
-      headless: true,
-      args: ['--no-sandbox', '--lang=' + lang, '--accept-lang=' + lang],
-      timeout: 10000,
+    // const browser = await puppeteer.launch({
+    //   headless: true,
+    //   args: ['--no-sandbox', '--lang=' + lang, '--accept-lang=' + lang],
+    //   timeout: 10000,
+    // });
+    const browser = await puppeteerCore.launch({
+      args: chromium.args,
+      defaultViewport: chromium.defaultViewport,
+      executablePath: await chromium.executablePath(),
+      headless: chromium.headless,
     });
     const page = await browser.newPage();
     await page.setViewport({ width: 1280, height: 720 });
