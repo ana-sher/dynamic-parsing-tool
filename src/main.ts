@@ -9,11 +9,10 @@ async function bootstrap() {
     .setTitle('Parsing Tool')
     .setDescription('API for parsing pages to objects.')
     .setVersion('1.0')
-    .addTag('parsing')
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);
-
-  await app.listen(process.env.PORT || '80');
+  //app.enableCors();
+  await app.listen(process.env.PORT || '3001');
 }
 bootstrap();

@@ -1,17 +1,17 @@
 import { CreatorObj } from './creator-obj';
-import { ApiModelProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import { HeaderDto } from './header-dto';
 
 export class CreatorDto {
-  @ApiModelProperty()
+  @ApiProperty()
   url: string;
 
-  @ApiModelProperty()
+  @ApiProperty({ default: false })
   runPageScripts: boolean = false;
 
-  @ApiModelProperty({ type: [CreatorObj] })
+  @ApiProperty({ type: [CreatorObj] })
   types: CreatorObj[];
 
-  @ApiModelProperty({ type: [HeaderDto] })
+  @ApiProperty({ type: [HeaderDto] })
   headers: HeaderDto[];
 }

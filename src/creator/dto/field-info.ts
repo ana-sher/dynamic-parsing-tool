@@ -1,21 +1,27 @@
-import { ApiModelProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class FieldInfo {
-  @ApiModelProperty()
+  @ApiProperty()
   name: string;
 
-  @ApiModelProperty()
+  @ApiProperty()
   type: string;
 
-  @ApiModelProperty()
+  @ApiProperty({ default: '.class[attribute="value"] > .child-class' })
   path: string;
 
-  @ApiModelProperty()
+  @ApiProperty({ default: false })
   isArray: boolean;
 
-  @ApiModelProperty()
+  @ApiProperty({ default: 'textContent' })
   fieldInHtml: string = 'textContent';
 
-  @ApiModelProperty()
+  @ApiProperty({ default: false })
   isNodeAttribute: boolean = false;
+
+  @ApiProperty({
+    description: `Describe values acceptable with separator ;. It will search includes in string and then transforming array elements that were filtered`,
+    default: 'value1;value2',
+  })
+  arrayFilter: string = '';
 }

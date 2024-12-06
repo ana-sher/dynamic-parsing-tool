@@ -1,10 +1,10 @@
 import { FieldInfo } from './field-info';
-import { ApiModelProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class CreatorObj {
-  @ApiModelProperty()
+  @ApiProperty({ default: 'Root' })
   typeName: string;
 
-  @ApiModelProperty({ type: [FieldInfo] })
+  @ApiProperty({ type: [FieldInfo] })
   objectFields: FieldInfo[];
 }
