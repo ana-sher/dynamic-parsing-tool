@@ -18,7 +18,7 @@ async function bootstrap() {
   else {
     app.enableCors({
       origin: 'https://dance-helper-app.vercel.app',
-      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
       preflightContinue: false,
       optionsSuccessStatus: 204,
     });
