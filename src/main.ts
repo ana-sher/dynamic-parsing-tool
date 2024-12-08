@@ -14,13 +14,14 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);
 
-  if (process.env.NODE_ENV == 'development') app.enableCors();
-  else {
+  if (process.env.NODE_ENV == 'development') {
+    app.enableCors();
+  } else {
     app.enableCors({
-      origin: 'https://dance-helper-app.vercel.app',
+      origin: ['https://dance-helper-app.vercel.app'],
       methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
-      preflightContinue: false,
-      optionsSuccessStatus: 204,
+      allowedHeaders: 'Content-Type, Accept',
+      credentials: true,
     });
   }
 
