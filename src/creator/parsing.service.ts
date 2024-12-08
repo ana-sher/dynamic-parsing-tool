@@ -42,20 +42,20 @@ export class ParsingService {
     puppeteer.use(StealthPlugin());
     const lang = config.headers['accept-language'] ?? 'en-US,en';
     let browser;
-    // if (process.env.NODE_ENV == 'development') {
-    //   browser = await puppeteer.launch({
-    //     headless: true,
-    //     args: ['--no-sandbox', '--lang=' + lang, '--accept-lang=' + lang],
-    //     timeout: 10000,
-    //   });
-    // } else {
+    if (process.env.NODE_ENV == 'development') {
+      browser = await puppeteer.launch({
+        headless: true,
+        args: ['--no-sandbox', '--lang=' + lang, '--accept-lang=' + lang],
+        timeout: 10000,
+      });
+    } else {
       browser = await puppeteerCore.launch({
         args: chromium.args,
         defaultViewport: chromium.defaultViewport,
         executablePath: await chromium.executablePath(),
         headless: chromium.headless,
       });
-    // }
+    }
     const page = await browser.newPage();
     await page.setViewport({ width: 1280, height: 720 });
     const userAgent =
