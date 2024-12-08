@@ -13,7 +13,17 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);
-  //app.enableCors();
+
+  if (process.env.NODE_ENV == 'development') app.enableCors();
+  else {
+    app.enableCors({
+      origin: ['https://dance-helper-app.vercel.app'],
+      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+      preflightContinue: false,
+      optionsSuccessStatus: 204,
+    });
+  }
+
   await app.listen(process.env.PORT || '3001');
 }
 bootstrap();
